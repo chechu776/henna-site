@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" style="scroll-behavior: smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aayath Henna Designs - Contact</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.8/cdn.min.js"></script>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            font-family: "Montserrat", sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen flex flex-col scroll-smooth bg-[#fdfaf6] text-gray-800 overflow-x-hidden transition-all duration-300"
+    x-data="{ navOpen: false }">
+
+    <nav x-data="{ scrolled: false }"
+        x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 390 })"
+        :class="scrolled ? 'bg-black/90 backdrop-blur shadow text-white' : 'bg-transparent text-white'"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300" role="navigation"
+        aria-label="Primary Navigation">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
+            <!-- Hamburger Menu button - visible only on mobile -->
+            <button @click="navOpen = !navOpen" aria-label="Toggle menu"
+                class="lg:hidden text-white hover:text-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded z-50 relative"
+                type="button">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html"
+                class="absolute left-1/2 transform -translate-x-1/2 lg:static lg:translate-x-0 lg:left-0 font-bold text-4xl"
+                style="font-family: 'Times New Roman', Times, serif;" aria-label="Aayath_Henna_Design ">
+                <!-- Example logo SVG, replace with your own -->
+                <!-- <svg
+            class="w-10 h-10 fill-white"
+            viewBox="0 0 48 48"
+            role="img"
+            aria-labelledby="logoTitle"
+          >
+            <title id="logoTitle">The Wedding Paradise</title>
+            <circle
+              cx="24"
+              cy="24"
+              r="22"
+              stroke="white"
+              stroke-width="2"
+              fill="none"
+            />
+            <text
+              x="50%"
+              y="58%"
+              text-anchor="middle"
+              font-family="Montserrat"
+              font-weight="700"
+              font-size="20"
+              fill="white"
+            >
+              RL
+            </text>
+          </svg> -->Aayath Henna
+            </a>
+
+            <!-- Nav links and socials on desktop -->
+            <div class="hidden lg:flex items-center gap-8 ml-auto">
+                <a href="services.html" class="hover:text-pink-400 font-medium transition">Services</a>
+                <a href="Gallery.html" class="hover:text-pink-400 font-medium transition">Gallery</a>
+                <a href="about.html" class="hover:text-pink-400 font-medium transition">About us</a>
+                <a href="contact.html" class="hover:text-pink-400 font-medium transition">Contact</a>
+                <!-- Social icons -->
+                <a href="https://www.instagram.com/aayath_henna?igsh=Y294bWJ5c3JpeDMz" target="_blank" rel="noopener"
+                    aria-label="Instagram" class="hover:text-pink-500 transition">
+                    <i class="ph ph-instagram-logo text-2xl"></i>
+                </a>
+            </div>
+
+            <!-- Mobile slide-in menu -->
+            <div x-show="navOpen" @keydown.escape.window="navOpen = false"
+                x-transition:enter="transition-all ease-out duration-300"
+                x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave="transition-all ease-in duration-200"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="-translate-x-full opacity-0"
+                class="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden flex" style="display: none;">
+                <nav class="bg-[#1f2128] w-4/5 max-w-xs min-h-screen p-6 flex flex-col shadow-xl text-white">
+                    <button @click="navOpen = false" aria-label="Close menu"
+                        class="self-end mb-4 hover:text-pink-400 transition">
+                        <i class="ph ph-x text-3xl"></i>
+                    </button>
+                    <a href="index.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Home</a>
+                    <a href="services.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Services</a>
+                    <a href="Gallery.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Gallery</a>
+                    <a href="about.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">About us</a>
+                    <a href="contact.html" @click="navOpen = false"
+                        class="mb-8 text-lg font-semibold hover:text-pink-400 transition">Contact</a>
+
+                </nav>
+                <!-- Click outside closes menu -->
+                <div class="flex-1" @click="navOpen = false" tabindex="-1" aria-hidden="true"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="relative bg-blue-800 bg-fixed bg-cover bg-center text-white"
+            style="background-image: url('assets/contactbg.jpg');background-position: center 100%;">
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center text-center py-20 px-4">
+                <h1 class="text-3xl sm:text-5xl font-bold mb-3 drop-shadow">Contact Us</h1>
+                <p class="max-w-xl text-sm sm:text-base leading-relaxed text-gray-200">
+                    Let us bring beauty and tradition to your special day. Reach out for bridal henna, events, or custom
+                    designs.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM + INFO -->
+        <section class="bg-white text-gray-800 py-16 px-6 md:px-10">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+
+                <!-- Contact Info -->
+                <div class="text-sm text-gray-700 space-y-4" data-aos="fade-right">
+                    <h2 class="text-xl font-semibold text-gray-900">Get in Touch</h2>
+                    <p class="text-gray-600 leading-relaxed text-[13px]">
+                        At <span class="font-semibold text-pink-600">Aayath Henna Designs</span>, every pattern tells a
+                        story. Whether it’s your bridal mehndi, festive designs, or a custom request — we’d love to hear
+                        from you!
+                    </p>
+                    <ul class="space-y-3 text-[13px]">
+                        <li>
+                            <strong class="text-gray-800">📍 Address:</strong><br />
+                            Mattancherry,Kochi
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">📞 Phone:</strong>
+                            <a href="tel:+919744516588" class="text-pink-600 hover:underline ml-1">+91 97445 16588</a>
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">📧 Email:</strong>
+                            <a href="mailto:suhanashameer5@gmail.com"
+                                class="text-pink-600 hover:underline ml-1">suhanashameer5@gmail.com</a>
+                        </li>
+                        <li>
+                            <strong class="text-gray-800">⏰ Hours:</strong><br />
+                            Mon - Sun: 10:00 AM – 9:00 PM
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Form -->
+                <form action="https://formspree.io/f/mqadkqlz" method="POST"
+                    class="w-full max-w-lg mx-auto p-8 sm:p-10 bg-white rounded-3xl shadow-xl border border-gray-200"
+                    id="enquiryForm" data-aos="fade-left">
+
+                    <h3 class="text-3xl font-playfair-display font-bold text-gray-900 text-center mb-2">
+                        Book Your Henna
+                    </h3>
+                    <p class="text-sm text-gray-500 text-center mb-8">
+                        Share your details & we’ll get back within 24 hours.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                            <input type="text" name="name" id="name" required
+                                class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200"
+                                placeholder="e.g., Ayesha Khan" />
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                            <input type="email" name="email" id="email" required
+                                class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200"
+                                placeholder="e.g., ayesha@example.com" />
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="10" required
+                                class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200"
+                                placeholder="10-digit mobile" />
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your
+                                Message</label>
+                            <textarea name="message" id="message" rows="4" required
+                                class="w-full px-4 py-2.5 rounded-lg text-sm border border-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200 resize-none"
+                                placeholder="Tell us about your event..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full py-3 mt-4 text-base font-semibold bg-pink-600 hover:bg-pink-700 text-white rounded-lg transition-colors duration-200 shadow-md transform hover:scale-[1.01]">
+                            Send Message
+                        </button>
+                        <p id="successMessage" class="text-green-600 text-center hidden text-sm">
+                            Message sent successfully!
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div x-data="{ open: false }" class="fixed bottom-6 right-4 z-50">
+        <div x-show="open" x-transition class="flex flex-col items-center gap-3 mb-3" @click.outside="open = false">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/919746986588" target="_blank"
+                class="bg-green-500 hover:bg-green-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all">
+                <i class="ph ph-whatsapp-logo text-xl"></i>
+            </a>
+            <!-- Call -->
+            <a href="tel:+919744516588"
+                class="bg-pink-600 hover:bg-pink-700 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all">
+                <i class="ph ph-phone-call text-xl"></i>
+            </a>
+            <!-- Email -->
+            <a href="mailto:suhanashameer5@gmail.com"
+                class="bg-red-500 hover:bg-red-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all">
+                <i class="ph ph-envelope-simple text-xl"></i>
+            </a>
+        </div>
+
+        <!-- Toggle FAB -->
+        <button @click="open = !open"
+            class="bg-black hover:bg-gray-800 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-xl transition-all relative">
+            <i x-show="!open" class="ph ph-phone text-2xl absolute"></i>
+            <i x-show="open" class="ph ph-x text-2xl absolute"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 text-sm px-6 py-10 mt-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-2">Aayath Henna Designs</h3>
+                <p class="text-xs leading-relaxed">Celebrating beauty and tradition through timeless henna artistry.</p>
+                <p class="text-xs mt-4">&copy; 2025 Aayath Henna. All rights reserved.</p>
+            </div>
+
+            <div class="text-sm">
+                <h4 class="text-white font-medium mb-3">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+                    <li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li>
+                    <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-medium mb-3">Follow Us</h4>
+                <div class="flex gap-4 mb-4">
+                    <a href="https://instagram.com/" target="_blank"
+                        class="w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-pink-500/80 rounded-full">
+                        <i class="ph ph-instagram-logo text-lg text-white"></i>
+                    </a>
+                    <a href="https://facebook.com/" target="_blank"
+                        class="w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-blue-500/80 rounded-full">
+                        <i class="ph ph-facebook-logo text-lg text-white"></i>
+                    </a>
+                </div>
+                <a href="mailto:info@aayathhenna.com"
+                    class="block text-xs hover:text-white transition">info@aayathhenna.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        AOS.init({ once: true, duration: 800 });
+        const form = document.getElementById("enquiryForm");
+        const successMessage = document.getElementById("successMessage");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = value });
+            fetch(form.action, {
+                method: "POST",
+                headers: { Accept: "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        form.reset();
+                        successMessage.classList.remove("hidden");
+                    } else {
+                        alert("Something went wrong. Please try again later.");
+                    }
+                })
+                .catch(() => alert("Error sending message."));
+        });
+    </script>
+</body>
+
+</html>
