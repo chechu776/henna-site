@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" style="scroll-behavior:smooth;">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aayath Henna</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.8/cdn.min.js"></script>
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Google Fonts: Montserrat -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Slow spin animation for SVG circle */
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes scroll-loop {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-25%);
+            }
+        }
+
+        .animate-scroll-loop {
+            animation: scroll-loop 35s linear infinite;
+            display: flex;
+            width: max-content;
+        }
+
+        .story-card {
+            min-width: 240px;
+            max-width: 280px;
+            margin-right: 1.5rem;
+            background-color: rgba(45, 44, 44, 0.20);
+            /* More transparent */
+            backdrop-filter: blur(6px);
+            /* Subtle blur for frosted glass effect */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .story-img {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .story-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .story-quote {
+            font-size: 0.75rem;
+            color: #4B5563;
+            margin: 0.25rem 0 0.5rem;
+        }
+
+        .story-link {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #DB2777;
+            text-decoration: none;
+        }
+
+        .story-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="scroll-smooth bg-[#f5f5f5]] text-white overflow-x-hidden transition-all duration-300"
+    x-data="{ navOpen: false }">
+    <!-- Fixed Transparent Navbar -->
+    <nav x-data="{ scrolled: false }"
+        x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 390 })"
+        :class="scrolled ? 'bg-black/90 backdrop-blur shadow text-white' : 'bg-transparent text-white'"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300" role="navigation"
+        aria-label="Primary Navigation">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between relative">
+            <!-- Hamburger Menu button - visible only on mobile -->
+            <button @click="navOpen = !navOpen" aria-label="Toggle menu"
+                class="lg:hidden text-white hover:text-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded z-50 relative"
+                type="button">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+
+            <!-- Logo -->
+            <a href="index.html"
+                class="absolute left-1/2 transform -translate-x-1/2 lg:static lg:translate-x-0 lg:left-0 font-bold text-4xl"
+                style="font-family: 'Times New Roman', Times, serif;" aria-label="Aayath_Henna_Design ">
+                <!-- Example logo SVG, replace with your own -->
+                <!-- <svg
+            class="w-10 h-10 fill-white"
+            viewBox="0 0 48 48"
+            role="img"
+            aria-labelledby="logoTitle"
+          >
+            <title id="logoTitle">The Wedding Paradise</title>
+            <circle
+              cx="24"
+              cy="24"
+              r="22"
+              stroke="white"
+              stroke-width="2"
+              fill="none"
+            />
+            <text
+              x="50%"
+              y="58%"
+              text-anchor="middle"
+              font-family="Montserrat"
+              font-weight="700"
+              font-size="20"
+              fill="white"
+            >
+              RL
+            </text>
+          </svg> -->Aayath Henna
+            </a>
+
+            <!-- Nav links and socials on desktop -->
+            <div class="hidden lg:flex items-center gap-8 ml-auto">
+                <a href="services.html" class="hover:text-pink-400 font-medium transition">Services</a>
+                <a href="Gallery.html" class="hover:text-pink-400 font-medium transition">Gallery</a>
+                <a href="about.html" class="hover:text-pink-400 font-medium transition">About us</a>
+                <a href="contact.html" class="hover:text-pink-400 font-medium transition">Contact</a>
+                <!-- Social icons -->
+                <a href="https://www.instagram.com/aayath_henna?igsh=Y294bWJ5c3JpeDMz" target="_blank" rel="noopener"
+                    aria-label="Instagram" class="hover:text-pink-500 transition">
+                    <i class="ph ph-instagram-logo text-2xl"></i>
+                </a>
+            </div>
+
+            <!-- Mobile slide-in menu -->
+            <div x-show="navOpen" @keydown.escape.window="navOpen = false"
+                x-transition:enter="transition-all ease-out duration-300"
+                x-transition:enter-start="-translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave="transition-all ease-in duration-200"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="-translate-x-full opacity-0"
+                class="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden flex" style="display: none;">
+                <nav class="bg-[#1f2128] w-4/5 max-w-xs min-h-screen p-6 flex flex-col shadow-xl text-white">
+                    <button @click="navOpen = false" aria-label="Close menu"
+                        class="self-end mb-4 hover:text-pink-400 transition">
+                        <i class="ph ph-x text-3xl"></i>
+                    </button>
+                    <a href="index.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Home</a>
+                    <a href="services.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Services</a>
+                    <a href="Gallery.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">Gallery</a>
+                    <a href="about.html" @click="navOpen = false"
+                        class="mb-4 text-lg font-semibold hover:text-pink-400 transition">About us</a>
+                    <a href="contact.html" @click="navOpen = false"
+                        class="mb-8 text-lg font-semibold hover:text-pink-400 transition">Contact</a>
+
+                </nav>
+                <!-- Click outside closes menu -->
+                <div class="flex-1" @click="navOpen = false" tabindex="-1" aria-hidden="true"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
+        <!-- Desktop Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 hidden lg:block"
+            poster="YOUR_DESKTOP_VIDEO_POSTER.jpg" aria-hidden="true">
+            <source src="assets/video1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <!-- Mobile Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 block lg:hidden"
+            poster="YOUR_MOBILE_VIDEO_POSTER.jpg" aria-hidden="true">
+            <source src="assets/video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Dark Gradient Overlay -->
+        <div class="absolute inset-0 z-10" aria-hidden="true" style="
+          background: linear-gradient(
+            to top,
+            rgba(22, 24, 30, 0.92) 0%,
+            rgba(22, 24, 30, 0.78) 30%,
+            rgba(24, 26, 32, 0.65) 60%,
+            rgba(24, 26, 32, 0.2) 100%
+          );
+        "></div>
+
+        <!-- Centered 4-word Heading -->
+        <div class="absolute inset-0 flex items-center justify-center z-20"
+            style="font-family: 'Montserrat', 'Inter', sans-serif;">
+            <div class="max-w-xl px-4 text-center">
+                <h3 class="text-xl md:text-xl lg:text-2xl font-bold tracking-wide text-white drop-shadow-lg">
+                    “Every Pattern, A Promise. Every Design, A Dream.”
+                </h3>
+            </div>
+        </div>
+
+
+        <!-- Center Bottom Logo -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30" aria-label="Brand Logo">
+            <img src="assets/logo.png" alt="Brand Logo" class="w-36 h-36 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain"
+                loading="lazy" />
+        </div>
+        <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 z-30 animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white opacity-70" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="relative bg-[#f5f5f5] py-20 text-black px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+
+            <!-- Text Content -->
+            <div class="space-y-6">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-black text-center">
+                    TIMELESS BEAUTY <br>
+                    BY <span class="text-pink-600">AAYATH HENNA DESIGN</span>
+                </h2>
+
+                <p class="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed md:leading-loose max-w-2xl mx-auto md:mx-0"
+                    data-aos="fade-right" data-aos-delay="400">
+                    Every bride’s journey is adorned with dreams, love, and tradition. At
+                    <span class="text-pink-600 font-semibold">Aayath Henna Design</span>, we craft those
+                    emotions into intricate patterns that reflect elegance and grace. From delicate florals
+                    to bold traditional motifs, each design is more than art—it’s a symbol of love, culture,
+                    and celebration. Let your hands and feet tell your story with the timeless beauty of henna,
+                    creating memories that linger beyond the wedding day.
+                </p>
+
+                <blockquote class="text-gray-400 italic text-sm">
+                    “Two hearts, one journey — etched in the art of bridal henna.”<br />
+                    <span class="text-xs">— Aayath Henna Design</span>
+                </blockquote>
+            </div>
+
+            <!-- Henna Designs Showcase -->
+            <div class="grid md:grid-cols-2 gap-6" data-aos="fade-left" data-aos-delay="200">
+                <!-- Large Design Card -->
+                <div class="bg-white p-4 rounded-xl shadow-md">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="assets/bridal.jpg" alt="Bridal Henna Full Hand"
+                            class="object-cover w-full h-[400px] md:h-[460px] rounded-lg transform transition duration-500 hover:scale-105 cursor-pointer" />
+                    </div>
+                    <div class="mt-4 text-center">
+                        <h3 class="text-lg font-semibold text-black">Bridal Full Hand</h3>
+                        <p class="text-sm italic text-gray-500">Elegant & Traditional</p>
+                    </div>
+                </div>
+
+                <!-- Two Small Design Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
+                    <!-- Small Card 1 -->
+                    <div class="bg-white p-4 rounded-xl shadow-md" data-aos="fade-down">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="assets/arabic.jpg" alt="Arabic Henna"
+                                class="object-cover w-full h-[180px] md:h-[210px] rounded-lg transform transition duration-500 hover:scale-105 cursor-pointer" />
+                        </div>
+                        <div class="mt-3 text-center">
+                            <h3 class="text-sm font-semibold text-black">Arabic Henna</h3>
+                            <p class="text-xs italic text-gray-500">Bold & Flowing</p>
+                        </div>
+                    </div>
+
+                    <!-- Small Card 2 -->
+                    <div class="bg-white p-4 rounded-xl shadow-md">
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="assets/feet.jpg" alt="Feet Henna"
+                                class="object-cover w-full h-[180px] md:h-[210px] rounded-lg transform transition duration-500 hover:scale-105 cursor-pointer" />
+                        </div>
+                        <div class="mt-3 text-center">
+                            <h3 class="text-sm font-semibold text-black">Bridal Feet</h3>
+                            <p class="text-xs italic text-gray-500">Graceful & Detailed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <section class="py-24 px-6 bg-cover bg-center bg-no-repeat bg-fixed relative"
+        style="background-image: url('assets/white1.jpg');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto">
+
+            <!-- Heading -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-800">Our Henna Signature</h2>
+                <p class="text-base text-gray-600 mt-4 max-w-2xl mx-auto leading-relaxed">
+                    At <strong>Aayath Henna</strong>, we don’t just draw patterns — we create timeless art on your skin.
+                    Our designs blend tradition with elegance, making every bride feel radiant, confident, and truly
+                    unique
+                    on her special day.
+                </p>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-16 relative">
+                <div class="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gray-300/30 z-0"></div>
+
+                <!-- Text -->
+                <div class="text-gray-700 px-2 z-10" data-aos="fade-right">
+                    <h3 class="text-xl font-bold tracking-wide mb-3">Intricate Bridal Art</h3>
+                    <p class="text-sm leading-relaxed">
+                        Every swirl, dot, and floral pattern is crafted with care, symbolizing love, prosperity, and
+                        happiness. Our bridal henna is a reflection of your story — detailed, elegant, and everlasting.
+                        <br><br>
+                        Whether you prefer traditional motifs or modern minimalism, our artistry adapts to your vision.
+                    </p>
+                </div>
+
+                <!-- Image -->
+                <div class="z-10" data-aos="fade-left">
+                    <img src="assets/int.jpg" alt="Bridal Henna"
+                        class="w-full rounded-xl shadow-md object-cover max-h-[320px] aspect-video mx-auto">
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-[1px] w-full bg-gray-300/40 my-12"></div>
+
+            <!-- Feature 2 -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-16 relative">
+                <div class="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gray-300/30 z-0"></div>
+
+                <!-- Image -->
+                <div class="z-10" data-aos="fade-right">
+                    <img src="assets/custom.jpg" alt="Custom Henna Designs"
+                        class="w-full rounded-xl shadow-md object-cover object-[60%_70%]  max-h-[320px] aspect-video mx-auto">
+                </div>
+
+                <!-- Text -->
+                <div class="text-gray-700 px-2 z-10" data-aos="fade-left">
+                    <h3 class="text-xl font-bold tracking-wide mb-3">Custom Creations</h3>
+                    <p class="text-sm leading-relaxed">
+                        Every bride is unique, and so are our designs. We take time to understand your preferences —
+                        from
+                        bold Arabic patterns to delicate Indian detailing — and bring your dream henna to life.
+                        <br><br>
+                        Our custom approach ensures your henna feels personal, meaningful, and one-of-a-kind.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-[1px] w-full bg-gray-300/40 my-12"></div>
+
+            <!-- Feature 3 -->
+            <div class="grid md:grid-cols-2 gap-10 items-center relative">
+                <div class="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gray-300/30 z-0"></div>
+
+                <!-- Text -->
+                <div class="text-gray-700 px-2 z-10" data-aos="fade-right">
+                    <h3 class="text-xl font-bold tracking-wide mb-3">Long-Lasting Elegance</h3>
+                    <p class="text-sm leading-relaxed">
+                        Using only natural and safe henna, we ensure rich color and long-lasting beauty. With the right
+                        care,
+                        your henna glows deep and vibrant, accompanying you through every wedding ritual and
+                        celebration.
+                        <br><br>
+                        Our promise is not just beautiful designs, but a safe and memorable henna experience.
+                    </p>
+                </div>
+
+                <!-- Image -->
+                <div class="z-10" data-aos="fade-left">
+                    <img src="assets/long.jpg" alt="Long-Lasting Henna"
+                        class="w-full rounded-xl shadow-md object-cover max-h-[320px] aspect-video mx-auto">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <!-- Instagram Section -->
+    <section class="bg-[#fdfdfd] py-20 px-6">
+        <!-- Heading -->
+        <div class="max-w-7xl mx-auto text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Follow Us on Instagram</h2>
+            <p class="text-sm text-gray-500 mt-2">@aayath_henna</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[2px] max-w-7xl mx-auto"
+            style="max-width: 1400px;">
+
+            <!-- First 4 Photos (Always Visible) -->
+            <div class="relative group overflow-hidden" data-aos="fade-up">
+                <img src="assets/1.jpg" alt="Insta 1"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>168 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden" data-aos="fade-up" data-aos-delay="50">
+                <img src="assets/2.jpg" alt="Insta 2"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>143 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                <img src="assets/3.jpg" alt="Insta 3"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>204 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                <img src="assets/4.jpg" alt="Insta 4"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>189 Likes</span>
+                </div>
+            </div>
+
+            <!-- Remaining Photos (Hidden on Mobile) -->
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/5.jpg" alt="Insta 5"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>176 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="250">
+                <img src="assets/6.jpg" alt="Insta 6"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm">208 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="300">
+                <img src="assets/7.jpg" alt="Insta 7"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>132 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="350">
+                <img src="assets/8.jpg" alt="Insta 8"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>151 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="400">
+                <img src="assets/9.jpg" alt="Insta 9"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>194 Likes</span>
+                </div>
+            </div>
+
+            <div class="relative group overflow-hidden hidden md:block" data-aos="fade-up" data-aos-delay="450">
+                <img src="assets/10.jpg" alt="Insta 10"
+                    class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div
+                    class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                    <span class="text-white text-sm"><i class="ph ph-heart mr-1"></i>170 Likes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Link -->
+        <div class="text-center mt-6">
+            <a href="https://www.instagram.com/aayath_henna?igsh=Y294bWJ5c3JpeDMz" target="_blank"
+                class="inline-flex items-center gap-2 text-pink-600 font-medium text-sm hover:underline">
+                <i class="ph ph-instagram-logo text-xl"></i> @aayath_henna
+            </a>
+        </div>
+    </section>
+
+
+
+
+    <!-- Floating Action Button -->
+    <div x-data="{ open: false }" class="fixed bottom-6 right-4 z-50">
+
+        <!-- Action Icons -->
+        <div x-show="open" x-transition class="flex flex-col items-center gap-3 mb-3" @click.outside="open = false">
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/919746986588" target="_blank"
+                class="bg-green-500 hover:bg-green-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-200">
+                <i class="ph ph-whatsapp-logo text-xl"></i>
+            </a>
+
+            <!-- Call -->
+            <a href="tel:+919744516588"
+                class="bg-blue-500 hover:bg-blue-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-200">
+                <i class="ph ph-phone-call text-xl"></i>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:suhanashameer5@email.com"
+                class="bg-red-500 hover:bg-red-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-200">
+                <i class="ph ph-envelope-simple text-xl"></i>
+            </a>
+        </div>
+
+        <!-- Toggle FAB Button -->
+        <button @click="open = !open"
+            class="bg-black hover:bg-gray-800 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-xl transition-all duration-300 relative">
+
+            <!-- Phone Icon -->
+            <i x-show="!open" x-transition:enter="transition transform ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-75" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition transform ease-in duration-150"
+                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-75"
+                class="ph ph-phone text-2xl absolute"></i>
+
+            <!-- Close Icon -->
+            <i x-show="open" x-transition:enter="transition transform ease-out duration-200"
+                x-transition:enter-start="opacity-0 scale-75" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition transform ease-in duration-150"
+                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-75"
+                class="ph ph-x text-2xl absolute"></i>
+        </button>
+    </div>
+
+
+
+    <section class="bg-white text-black">
+        <!-- Background Header Section -->
+        <div class="relative h-80 md:h-[24rem] bg-cover"
+            style="background-image: url('/assets/contact.jpg');background-position: center; ">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center px-4 text-center text-white">
+                <h2 class="text-2xl md:text-4xl font-bold">Get in Touch</h2>
+                <p class="mt-2 text-sm md:text-base max-w-xl">
+                    Let’s make your special day unforgettable with elegant henna artistry.
+                    Reach out to book your bridal or event henna designs today.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Contact Form -->
+        <div
+            class="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[45%] xl:w-[35%] mx-auto -mt-20 z-10 relative bg-white shadow-xl rounded-xl p-5 md:p-6 border border-gray-100">
+            <form action="https://formspree.io/f/mqadkqlz" method="POST" class="space-y-4" id="enquiryForm">
+
+                <!-- Heading -->
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800 text-center mb-1">Get in Touch</h3>
+                <p class="text-xs text-gray-500 text-center mb-4">We’ll get back to you within 24 hours.</p>
+
+                <!-- Name -->
+                <div class="flex flex-col gap-1">
+                    <label for="name" class="text-xs text-gray-600 font-medium">Name</label>
+                    <input type="text" name="name" id="name" required
+                        class="px-3 py-1.5 rounded-lg text-sm border border-gray-300 focus:ring-2 focus:ring-indigo-300 focus:outline-none transition-all duration-200" />
+                </div>
+
+                <!-- Phone -->
+                <div class="flex flex-col gap-1">
+                    <label for="phone" class="text-xs text-gray-600 font-medium">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="10" required
+                        placeholder="10-digit mobile"
+                        class="px-3 py-1.5 rounded-lg text-sm border border-gray-300 focus:ring-2 focus:ring-indigo-300 focus:outline-none transition-all duration-200" />
+                </div>
+
+                <!-- Message -->
+                <div class="flex flex-col gap-1">
+                    <label for="message" class="text-xs text-gray-600 font-medium">Your Message</label>
+                    <textarea name="message" id="message" required rows="3" placeholder="Type something..."
+                        class="px-3 py-1.5 rounded-lg text-sm border border-gray-300 focus:ring-2 focus:ring-indigo-300 focus:outline-none transition-all duration-200 resize-none"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full py-2 text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-all duration-200 shadow-sm">
+                    Submit
+                </button>
+
+                <!-- Success Message -->
+                <p id="successMessage" class="text-green-600 text-center hidden text-sm mt-1">Message sent successfully!
+                </p>
+            </form>
+        </div>
+
+        <!-- Contact Cards -->
+        <div class="mt-10 px-4 max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+                <!-- Call Us -->
+                <div class="bg-white border rounded-lg shadow p-4 text-center">
+                    <div class="text-indigo-500 text-xl mb-1">
+                        <i class="ph ph-phone-call"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mb-0.5">Call Us</h4>
+                    <p class="text-xs text-gray-500 mb-0.5 leading-tight">Speak to a team member directly.</p>
+                    <p class="text-blue-600 text-xs font-medium leading-tight">+91 9744516588</p>
+                </div>
+
+                <!-- WhatsApp Us -->
+                <div class="bg-white border rounded-lg shadow p-4 text-center">
+                    <div class="text-green-600 text-xl mb-1">
+                        <i class="ph ph-whatsapp-logo"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mb-0.5">WhatsApp Us</h4>
+                    <p class="text-xs text-gray-500 mb-0.5 leading-tight">Instant support and inquiries.</p>
+                    <a href="https://wa.me/919746986588" target="_blank"
+                        class="inline-flex items-center justify-center gap-1 text-green-700 font-medium text-xs hover:underline">
+                        <i class="ph ph-paper-plane-right text-sm"></i>
+                        Start Chat
+                    </a>
+                </div>
+
+                <!-- Email Us -->
+                <div class="col-span-2 md:col-span-1 bg-white border rounded-lg shadow p-4 text-center">
+                    <div class="text-blue-500 text-xl mb-1">
+                        <i class="ph ph-envelope-simple"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mb-0.5">Email Us</h4>
+                    <p class="text-xs text-gray-500 mb-0.5 leading-tight">For general queries, including marketing.</p>
+                    <p class="text-blue-600 text-xs font-medium leading-tight">suhanashameer5@.com</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Minimal Footer -->
+    <footer class="bg-gray-950 text-gray-400 text-sm px-6 py-10 mt-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+            <!-- Column 1: Brand Info -->
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-2">Aayath Henna Design</h3>
+                <p class="text-xs leading-relaxed">
+                    Celebrating beauty and tradition with elegant bridal and custom henna designs.
+                    We bring artistry to your special occasions.
+                </p>
+                <p class="text-xs mt-4">&copy; 2025 Aayath Henna Design. All rights reserved.</p>
+            </div>
+
+            <!-- Column 2: Navigation Links -->
+            <div class="text-sm">
+                <h4 class="text-white font-medium mb-3">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                    <li><a href="about.html" class="hover:text-white transition">About</a></li>
+                    <li><a href="services.html" class="hover:text-white transition">Services</a></li>
+                    <li><a href="gallery.html" class="hover:text-white transition">Gallery</a></li>
+                    <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Social & Contact -->
+            <div>
+                <h4 class="text-white font-medium mb-3">Connect With Us</h4>
+                <div class="flex gap-4 mb-4">
+                    <a href="https://www.instagram.com/aayath_henna?igsh=Y294bWJ5c3JpeDMz" target="_blank" rel="noopener" aria-label="Instagram"
+                        class="w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-pink-500/80 text-white rounded-full transition-all">
+                        <i class="ph ph-instagram-logo text-lg"></i>
+                    </a>
+                    <a href="https://wa.me/919746986588" target="_blank" rel="noopener" aria-label="WhatsApp"
+                        class="w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-green-500/80 text-white rounded-full transition-all">
+                        <i class="ph ph-whatsapp-logo text-lg"></i>
+                    </a>
+                </div>
+                <a href="mailto:suhanashameer5@gmail.com" class="block text-xs hover:text-white transition">
+                   suhanashameer5@gmail.com
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <!-- Initialize AOS -->
+    <script>
+
+        AOS.init({ once: true, duration: 800 });
+        const form = document.getElementById("enquiryForm");
+        const successMessage = document.getElementById("successMessage");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        form.reset();
+                        successMessage.classList.remove("hidden");
+                    } else {
+                        alert("Something went wrong. Please try again later.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error sending message.");
+                });
+        });
+
+    </script>
+</body>
+
+</html>
