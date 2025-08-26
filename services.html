@@ -67,7 +67,7 @@
     </style>
 </head>
 
-<body class="min-h-screen flex flex-col bg-[#fefefe] text-gray-800">
+<body class="min-h-screen flex flex-col bg-[#fefefe] text-gray-800" x-data="{ navOpen: false }">
     <nav x-data="{ scrolled: false }"
         x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 390 })"
         :class="scrolled ? 'bg-black/90 backdrop-blur shadow text-white' : 'bg-transparent text-white'"
